@@ -1,13 +1,8 @@
 import React from "react";
-
 import { Card } from 'semantic-ui-react'
 
-const CardExampleCard = () => ({weatherData}) => (
-    <Card>
-        <Card.Content>
-            <Card.Header>{weatherData.name}</Card.Header>
-        </Card.Content>
-    </Card>
+const WeatherCard = ({ weatherData }) => (
+    <Card header={weatherData.name} />
 )
 
-export default CardExampleCard;
+export default WeatherCard;
