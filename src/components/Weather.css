@@ -1,0 +1,63 @@
+.weather-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 30px;
+  }
+  
+  .weather-card {
+    background-color: rgb(173, 228, 245);
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    border-radius: 10px;
+    padding: 30px;
+    text-align: center;
+    font-family: "Open Sans", sans-serif;
+    color: #4f4f4f;
+    width: 80%;
+    margin-top: 20px;
+  }
+  
+  .city-name {
+    font-size: 36px;
+    margin-bottom: 20px;
+  }
+  
+  .temp,
+  .humidity,
+  .condition,
+  .sunrise,
+  .sunset {
+    font-size: 24px;
+    margin-bottom: 10px;
+  }
+  
+  .error-message {
+    font-size: 18px;
+    color: red;
+    margin-top: 20px;
+  }
+  
+  input[type="text"] {
+    font-size: 18px;
+    padding: 10px;
+    border-radius: 5px;
+    border: none;
+    margin-bottom: 20px;
+    width: 60%;
+  }
+  
+  button[type="submit"] {
+    font-size: 18px;
+    padding: 10px 20px;
+    border-radius: 5px;
+    background-color: #4f4f4f;
+    color: white;
+    border: none;
+    cursor: pointer;
+    margin-top: 20px;
+    }
+
+.h1 {
+    display: flex;
+    text-align: center;
+}

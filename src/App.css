@@ -1,4 +1,5 @@
-.container {
-  max-width: 1080px;
-    margin: 20px auto;
-}
+h1 {
+    font-family: "Open Sans", sans-serif;
+    text-align: center;
+    width: 100%;
+    }
