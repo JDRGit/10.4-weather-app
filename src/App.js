@@ -5,7 +5,7 @@ import "./App.css";
 
 const App = () => {
   return (
-    <div>
+    <div className="header-container">
       <h1 className="header-message">Welcome to Jaime's Weather App</h1>
       <Weather />
       <Music />

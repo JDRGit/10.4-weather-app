@@ -52,7 +52,7 @@ const Weather = () => {
             Currently in {weatherData.name}:
           </h2>
           <p className="weather-card-text">
-            Temperature: {weatherData.main.temp}°F
+            Temperature: {weatherData.main.temp.toFixed()}°F
           </p>
           <p className="weather-card-text">
             Humidity: {weatherData.main.humidity}%
