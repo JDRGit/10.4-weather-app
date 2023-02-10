@@ -6,14 +6,15 @@
   }
   
   .weather-card {
-    background-color: rgb(173, 228, 245);
+    background-color: #f2f2f2, transparent;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
     border-radius: 10px;
-    padding: 30px;
+    padding: 10px;
     text-align: center;
     font-family: "Open Sans", sans-serif;
-    color: #4f4f4f;
-    width: 80%;
+    font-weight: 900;
+    color: white;
+    width: 30%;
     margin-top: 20px;
   }
   
