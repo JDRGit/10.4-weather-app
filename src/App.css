@@ -1,59 +1,78 @@
 @media screen and (max-width: 600px) {
-    .App {
-        background-image: url("https://picsum.photos/2000/1000?grayscale&blur=2");
-        background-repeat: no-repeat;
-        background-size: 100% 100%;
-    }
-    .App-header {
-        background-color: #282c34;
-        min-height: 100vh;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        font-size: calc(10px + 2vmin);
-        color: white;
-    }
-    .App-link {
-        color: #61dafb;
-    }
+  .App {
+    background-image: url("https://picsum.photos/2000/1000?grayscale&blur=2");
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+  }
+  .App-header {
+    background-color: #282c34;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-size: calc(10px + 2vmin);
+    color: white;
+  }
+  .App-link {
+    color: #61dafb;
+  }
+  .App-logo {
+    height: 40vmin;
+    pointer-events: none;
+  }
+  @media (prefers-reduced-motion: no-preference) {
     .App-logo {
-        height: 40vmin;
-        pointer-events: none;
+      animation: App-logo-spin infinite 20s linear;
     }
-    @media (prefers-reduced-motion: no-preference) {
-        .App-logo {
-            animation: App-logo-spin infinite 20s linear;
-        }
-    }
-    .App-title {
-        font-family: "Open Sans", sans-serif;
-        font-weight: 900;
-        color: white;
-        text-align: center;
-        width: 100%;
-    }
-    @keyframes App-logo-spin {
-        from {
-            transform: rotate(0deg);
-        }
-        to {
-            transform: rotate(360deg);
-        }
-    }
-}
-    
-h1 {
+  }
+  .App-title {
     font-family: "Open Sans", sans-serif;
     font-weight: 900;
     color: white;
     text-align: center;
     width: 100%;
-    margin-top: auto;
+  }
+  @keyframes App-logo-spin {
+    from {
+      transform: rotate(0deg);
     }
+    to {
+      transform: rotate(360deg);
+    }
+  }
+}
+
+.header-message {
+  background-color: rgba(242, 242, 242, 0.5);
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  border-radius: 10px;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 30px;
+}
+
+
+header {
+  background-color: rgba(242, 242, 242, 0.5);
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  border-radius: 10px;
+  padding: 10px;
+}
+
+h1 {
+  font-family: "Open Sans", sans-serif;
+  font-weight: 900;
+  color: rgb(1, 11, 66);
+  text-align: center;
+  width: 100%;
+  margin-top: auto;
+}
 
 body {
-    background-image: url("https://picsum.photos/2000/1000?grayscale&blur=2");
-    background-repeat: no-repeat;
-    background-size: 100% 100%;
+  background-image: url("https://picsum.photos/2000/1000");
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
 }
