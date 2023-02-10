@@ -21,9 +21,21 @@ const Weather = () => {
 
   const formatTime = (timestamp) => {
     const date = new Date(timestamp * 1000);
-    const hours = date.getHours();
+    let hours = date.getHours();
     const minutes = `0${date.getMinutes()}`;
-    const formattedTime = `${hours}:${minutes.substr(-2)}`;
+    let formattedTime;
+  
+    if (hours > 12) {
+      hours -= 12;
+      formattedTime = `${hours}:${minutes.substr(-2)} PM`;
+    } else if (hours === 12) {
+      formattedTime = `12:${minutes.substr(-2)} PM`;
+    } else if (hours === 0) {
+      hours = 12;
+      formattedTime = `${hours}:${minutes.substr(-2)} AM`;
+    } else {
+      formattedTime = `${hours}:${minutes.substr(-2)} AM`;
+    }
     return formattedTime;
   };
 
