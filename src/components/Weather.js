@@ -6,7 +6,7 @@ const Weather = () => {
 
   const fetchWeatherData = async (latitude, longitude) => {
     const API_KEY = "1a20232643563d73c8a804ad7de5825f";
-    const API_URL = `http://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&units=imperial&appid=${API_KEY}`;
+    const API_URL = `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&units=imperial&appid=${API_KEY}`;
 
     try {
       const response = await fetch(API_URL);
