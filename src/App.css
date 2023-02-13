@@ -104,20 +104,6 @@ body {
   width: 80%;
 }
 
-.city-name {
-  font-size: 36px;
-  margin-bottom: 20px;
-}
-
-.temp,
-.humidity,
-.condition,
-.sunrise,
-.sunset {
-  font-size: 24px;
-  margin-bottom: 10px;
-}
-
 .error-message {
   font-size: 18px;
   color: red;
