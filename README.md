@@ -51,8 +51,6 @@ This project was built using the following technologies:
 - AJAX: Asynchronous JavaScript and XML is used to make API requests and dynamically update the user interface.
 
 
-
-
 ## Screenshots
 
 ![Jaime's Weather App](./src/assets/JaimeWeatherApp.jpg)
