@@ -1,6 +1,4 @@
 import React, { useState, useEffect } from "react";
-import "./Weather.css";
-
 
 const Weather = () => {
   const [weatherData, setWeatherData] = useState({});
@@ -24,7 +22,7 @@ const Weather = () => {
     let hours = date.getHours();
     const minutes = `0${date.getMinutes()}`;
     let formattedTime;
-  
+
     if (hours > 12) {
       hours -= 12;
       formattedTime = `${hours}:${minutes.substr(-2)} PM`;

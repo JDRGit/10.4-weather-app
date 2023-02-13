@@ -1,27 +1,11 @@
-import React, { useState } from "react";
-import "./Music.css";
+import React from "react";
+import ReactAudioPlayer from "react-audio-player";
+import song from "./../assets/Airport-Lounge.mp3";
 
-const App = () => {
-  const [isPlaying, setIsPlaying] = useState(false);
+const Music = () => (
+  <div className="music-container">
+    <ReactAudioPlayer src={song} autoPlay controls loop />  
+  </div>
+);
 
-  const togglePlay = () => {
-    setIsPlaying(!isPlaying);
-  };
-
-  return (
-    <div className="music-container">
-      <audio
-        src="path/to/your/music.mp3"
-        autoPlay={isPlaying}
-        loop
-        onEnded={togglePlay}
-        controls
-      />
-      <button onClick={togglePlay}>
-        {isPlaying ? "Pause" : "Play"}
-      </button>
-    </div>
-  );
-};
-
-export default App;
+export default Music;
