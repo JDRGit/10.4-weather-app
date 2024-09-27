@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from "react";
 
 const Weather = () => {
-  const [weatherData, setWeatherData] = useState({});
+  const [weatherData, setWeatherData] = useState(null);
   const [error, setError] = useState("");
+  const [loading, setLoading] = useState(true);
 
   const fetchWeatherData = async (latitude, longitude) => {
     const API_KEY = "1a20232643563d73c8a804ad7de5825f";
@@ -10,10 +11,15 @@ const Weather = () => {
 
     try {
       const response = await fetch(API_URL);
+      if (!response.ok) {
+        throw new Error("Unable to fetch weather data");
+      }
       const data = await response.json();
       setWeatherData(data);
+      setLoading(false);
     } catch (error) {
-      setError(error.message);
+      setError("Error fetching weather data");
+      setLoading(false);
     }
   };
 
@@ -45,18 +51,21 @@ const Weather = () => {
           fetchWeatherData(latitude, longitude);
         },
         (error) => {
-          setError(error.message);
+          setError("Geolocation permission denied");
+          setLoading(false);
         }
       );
     } else {
       setError("Geolocation is not supported by this browser.");
+      setLoading(false);
     }
   }, []);
 
   return (
     <div className="weather-container">
+      {loading && <div>Loading weather data...</div>}
       {error && <div className="error">{error}</div>}
-      {weatherData.name && (
+      {weatherData && weatherData.main && (
         <div className="weather-card">
           <h2 className="weather-card-title">
             Currently in {weatherData.name}:
