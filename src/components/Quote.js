@@ -1,41 +1,53 @@
 import React, { useState, useEffect } from 'react';
 
 const Quote = () => {
-  const [quote, setQuote] = useState('');
+  const [quote, setQuote] = useState('Loading quote...');
   const [author, setAuthor] = useState('');
+  const [error, setError] = useState(null);
 
-  // Function to fetch a new quote
-  const fetchQuote = async () => {
-    try {
-      const response = await fetch('https://api.quotable.io/random');
-      const data = await response.json();
-      if (response.ok) {
+  useEffect(() => {
+    const controller = new AbortController();
+    const signal = controller.signal;
+
+    const fetchQuote = async () => {
+      try {
+        const response = await fetch('https://api.quotable.io/random', { signal });
+        const data = await response.json();
+        console.log(data);
+
+        if (!response.ok) {
+          throw new Error(data.message || 'Failed to fetch quote');
+        }
+
         setQuote(data.content);
         setAuthor(data.author);
-      } else {
-        setQuote('An error occurred');
-        setAuthor('');
-        console.error(data);
+      } catch (err) {
+        if (err.name !== 'AbortError') {
+          setError(err.message);
+          setQuote('An error occurred');
+          setAuthor('');
+          console.error(err);
+        }
       }
-    } catch (error) {
-      setQuote('An error occurred');
-      setAuthor('');
-      console.error(error);
-    }
-  };
+    };
 
-  // Fetch a quote once when the component mounts
-  useEffect(() => {
     fetchQuote();
+
+    return () => {
+      controller.abort();
+    };
   }, []);
+
+  if (error) {
+    return <div>Error: {error}</div>;
+  }
 
   return (
     <div className="quote-container">
       <div className="quote-card">
         <h2>Quote of the Day</h2>
         <p>{quote}</p>
-        <p>Author: {author}</p>
-        <button onClick={fetchQuote}>Get New Quote</button>
+        {author && <p>Author: {author}</p>}
       </div>
     </div>
   );
