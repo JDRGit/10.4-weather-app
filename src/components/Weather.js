@@ -4,6 +4,7 @@ const Weather = () => {
   const [weatherData, setWeatherData] = useState(null);
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(true);
+  const [backgroundImage, setBackgroundImage] = useState("");
 
   const fetchWeatherData = async (latitude, longitude) => {
     const API_KEY = "1a20232643563d73c8a804ad7de5825f";
@@ -16,6 +17,11 @@ const Weather = () => {
       }
       const data = await response.json();
       setWeatherData(data);
+      
+      // Set dynamic background based on weather
+      const weatherCondition = data.weather[0].main.toLowerCase();
+      setBackgroundImage(`https://picsum.photos/1920/1080?${weatherCondition}`);
+      
       setLoading(false);
     } catch (error) {
       setError("Error fetching weather data");
@@ -43,6 +49,29 @@ const Weather = () => {
     return formattedTime;
   };
 
+  const getWeatherIcon = (weatherMain, weatherId) => {
+    const iconMap = {
+      'clear': '☀️',
+      'clouds': '☁️',
+      'rain': '🌧️',
+      'drizzle': '🌦️',
+      'thunderstorm': '⛈️',
+      'snow': '❄️',
+      'mist': '🌫️',
+      'fog': '🌫️',
+      'haze': '🌫️'
+    };
+    return iconMap[weatherMain.toLowerCase()] || '🌤️';
+  };
+
+  const getTemperatureColor = (temp) => {
+    if (temp >= 80) return '#ff6b6b';
+    if (temp >= 70) return '#ffa726';
+    if (temp >= 60) return '#66bb6a';
+    if (temp >= 50) return '#42a5f5';
+    return '#7986cb';
+  };
+
   useEffect(() => {
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(
@@ -62,29 +91,78 @@ const Weather = () => {
   }, []);
 
   return (
-    <div className="weather-container">
-      {loading && <div>Loading weather data...</div>}
-      {error && <div className="error">{error}</div>}
+    <div className="weather-container" style={{backgroundImage: backgroundImage ? `url(${backgroundImage})` : 'none'}}>
+      {loading && (
+        <div className="loading-spinner">
+          <div className="spinner"></div>
+          <p>Loading weather data...</p>
+        </div>
+      )}
+      {error && <div className="error-message">{error}</div>}
       {weatherData && weatherData.main && (
-        <div className="weather-card">
-          <h2 className="weather-card-title">
-            Currently in {weatherData.name}:
-          </h2>
-          <p className="weather-card-text">
-            Temperature: {weatherData.main.temp.toFixed()}°F
-          </p>
-          <p className="weather-card-text">
-            Humidity: {weatherData.main.humidity}%
-          </p>
-          <p className="weather-card-text">
-            Conditions: {weatherData.weather[0].description}
-          </p>
-          <p className="weather-card-text">
-            Sunrise: {formatTime(weatherData.sys.sunrise)}
-          </p>
-          <p className="weather-card-text">
-            Sunset: {formatTime(weatherData.sys.sunset)}
-          </p>
+        <div className="weather-card-enhanced">
+          <div className="weather-header">
+            <div className="weather-icon">
+              {getWeatherIcon(weatherData.weather[0].main)}
+            </div>
+            <div className="location-info">
+              <h2 className="location-name">{weatherData.name}</h2>
+              <p className="country">{weatherData.sys.country}</p>
+            </div>
+          </div>
+          
+          <div className="temperature-display">
+            <span 
+              className="main-temperature" 
+              style={{color: getTemperatureColor(weatherData.main.temp)}}
+            >
+              {Math.round(weatherData.main.temp)}°F
+            </span>
+            <div className="feels-like">
+              Feels like {Math.round(weatherData.main.feels_like)}°F
+            </div>
+          </div>
+
+          <div className="weather-description">
+            {weatherData.weather[0].description.charAt(0).toUpperCase() + 
+             weatherData.weather[0].description.slice(1)}
+          </div>
+
+          <div className="weather-details-grid">
+            <div className="weather-detail">
+              <span className="detail-label">💧 Humidity</span>
+              <span className="detail-value">{weatherData.main.humidity}%</span>
+            </div>
+            <div className="weather-detail">
+              <span className="detail-label">👁️ Visibility</span>
+              <span className="detail-value">{weatherData.visibility ? (weatherData.visibility / 1000).toFixed(1) + ' km' : 'N/A'}</span>
+            </div>
+            <div className="weather-detail">
+              <span className="detail-label">🌬️ Wind Speed</span>
+              <span className="detail-value">{weatherData.wind?.speed || 0} mph</span>
+            </div>
+            <div className="weather-detail">
+              <span className="detail-label">📊 Pressure</span>
+              <span className="detail-value">{weatherData.main.pressure} hPa</span>
+            </div>
+          </div>
+
+          <div className="sun-times">
+            <div className="sun-time">
+              <span className="sun-icon">🌅</span>
+              <div>
+                <div className="sun-label">Sunrise</div>
+                <div className="sun-value">{formatTime(weatherData.sys.sunrise)}</div>
+              </div>
+            </div>
+            <div className="sun-time">
+              <span className="sun-icon">🌇</span>
+              <div>
+                <div className="sun-label">Sunset</div>
+                <div className="sun-value">{formatTime(weatherData.sys.sunset)}</div>
+              </div>
+            </div>
+          </div>
         </div>
       )}
     </div>
