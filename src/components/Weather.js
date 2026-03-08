@@ -1,12 +1,18 @@
 import React, { useState, useEffect } from "react";
 
+const WeatherCardText = ({ label, value }) => (
+  <p className="weather-card-text">
+    <strong>{label}:</strong> {value}
+  </p>
+);
+
 const Weather = () => {
   const [weatherData, setWeatherData] = useState(null);
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(true);
 
   const fetchWeatherData = async (latitude, longitude) => {
-    const API_KEY = "1a20232643563d73c8a804ad7de5825f";
+    const API_KEY = process.env.REACT_APP_WEATHER_API_KEY;
     const API_URL = `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&units=imperial&appid=${API_KEY}`;
 
     try {
@@ -18,7 +24,7 @@ const Weather = () => {
       setWeatherData(data);
       setLoading(false);
     } catch (error) {
-      setError("Error fetching weather data");
+      setError(error.message || "Error fetching weather data");
       setLoading(false);
     }
   };
@@ -50,7 +56,7 @@ const Weather = () => {
           const { latitude, longitude } = position.coords;
           fetchWeatherData(latitude, longitude);
         },
-        (error) => {
+        () => {
           setError("Geolocation permission denied");
           setLoading(false);
         }
@@ -62,29 +68,19 @@ const Weather = () => {
   }, []);
 
   return (
-    <div className="weather-container">
+    <div className="weather-container" role="main">
       {loading && <div>Loading weather data...</div>}
-      {error && <div className="error">{error}</div>}
+      {error && <div className="error" role="alert">{error}</div>}
       {weatherData && weatherData.main && (
         <div className="weather-card">
           <h2 className="weather-card-title">
             Currently in {weatherData.name}:
           </h2>
-          <p className="weather-card-text">
-            Temperature: {weatherData.main.temp.toFixed()}°F
-          </p>
-          <p className="weather-card-text">
-            Humidity: {weatherData.main.humidity}%
-          </p>
-          <p className="weather-card-text">
-            Conditions: {weatherData.weather[0].description}
-          </p>
-          <p className="weather-card-text">
-            Sunrise: {formatTime(weatherData.sys.sunrise)}
-          </p>
-          <p className="weather-card-text">
-            Sunset: {formatTime(weatherData.sys.sunset)}
-          </p>
+          <WeatherCardText label="Temperature" value={`${weatherData.main.temp.toFixed()}°F`} />
+          <WeatherCardText label="Humidity" value={`${weatherData.main.humidity}%`} />
+          <WeatherCardText label="Conditions" value={weatherData.weather[0].description} />
+          <WeatherCardText label="Sunrise" value={formatTime(weatherData.sys.sunrise)} />
+          <WeatherCardText label="Sunset" value={formatTime(weatherData.sys.sunset)} />
         </div>
       )}
     </div>
