@@ -11,15 +11,14 @@ const Quote = () => {
 
     const fetchQuote = async () => {
       try {
-        const response = await fetch('https://api.quotable.io/random', { signal });
-        const data = await response.json();
-        console.log(data);
+        const response = await fetch('https://dummyjson.com/quotes/random', { signal });
 
         if (!response.ok) {
-          throw new Error(data.message || 'Failed to fetch quote');
+          throw new Error('Failed to fetch quote');
         }
 
-        setQuote(data.content);
+        const data = await response.json();
+        setQuote(data.quote);
         setAuthor(data.author);
       } catch (err) {
         if (err.name !== 'AbortError') {
