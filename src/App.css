@@ -159,5 +159,101 @@ button[type="submit"] {
   display: flex;
   flex-direction: column;
   align-items: center;
+  padding: 30px;
+  width: 100%;
+}
+
+.music-card {
+  background-color: rgba(242, 242, 242, 0.5);
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  border-radius: 10px;
+  padding: 20px 30px;
+  font-family: "Open Sans", sans-serif;
+  color: rgb(1, 11, 66);
+  width: 80%;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.music-header {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.music-icon {
+  font-size: 2rem;
+}
+
+.music-title {
+  font-size: 18px;
+  font-weight: 900;
+  margin: 0;
+}
+
+.music-subtitle {
+  font-size: 13px;
+  font-weight: 400;
+  opacity: 0.7;
+  margin: 0;
+}
+
+.music-autoplay-notice {
+  font-size: 13px;
+  font-style: italic;
+  opacity: 0.8;
+  margin: 0;
   text-align: center;
+}
+
+.music-progress {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.music-time {
+  font-size: 13px;
+  font-weight: 600;
+  min-width: 36px;
+}
+
+.music-seek {
+  flex: 1;
+  accent-color: rgb(1, 11, 66);
+  cursor: pointer;
+}
+
+.music-controls {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.music-btn {
+  font-size: 1.5rem;
+  background: rgb(1, 11, 66);
+  color: white;
+  border: none;
+  border-radius: 50%;
+  width: 48px;
+  height: 48px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+  transition: transform 0.1s ease;
+}
+
+.music-btn:hover {
+  transform: scale(1.08);
+}
+
+.music-volume {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex: 1;
 }
