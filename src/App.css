@@ -250,10 +250,3 @@ button[type="submit"] {
 .music-btn:hover {
   transform: scale(1.08);
 }
-
-.music-volume {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  flex: 1;
-}

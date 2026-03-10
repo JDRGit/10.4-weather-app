@@ -5,7 +5,6 @@ const Music = () => {
   const audioRef = useRef(null);
   const [isPlaying, setIsPlaying] = useState(false);
   const [blocked, setBlocked] = useState(false);
-  const [volume, setVolume] = useState(0.5);
   const [currentTime, setCurrentTime] = useState(0);
   const [duration, setDuration] = useState(0);
 
@@ -37,10 +36,6 @@ const Music = () => {
     };
   }, []);
 
-  useEffect(() => {
-    audioRef.current.volume = volume;
-  }, [volume]);
-
   const togglePlay = () => {
     const audio = audioRef.current;
     if (isPlaying) {
@@ -51,12 +46,6 @@ const Music = () => {
       setIsPlaying(true);
       setBlocked(false);
     }
-  };
-
-  const handleVolume = (e) => {
-    const val = parseFloat(e.target.value);
-    audioRef.current.volume = val;
-    setVolume(val);
   };
 
   const handleSeek = (e) => {
@@ -106,19 +95,6 @@ const Music = () => {
           <button className="music-btn" onClick={togglePlay} aria-label={isPlaying ? "Pause" : "Play"}>
             {isPlaying ? "⏸" : "▶"}
           </button>
-          <div className="music-volume">
-            <span>🔈</span>
-            <input
-              type="range"
-              className="music-seek"
-              min={0}
-              max={1}
-              step={0.01}
-              value={volume}
-              onChange={handleVolume}
-            />
-            <span>🔊</span>
-          </div>
         </div>
       </div>
     </div>
