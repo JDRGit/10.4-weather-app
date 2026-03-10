@@ -11,7 +11,7 @@ const Music = () => {
 
   useEffect(() => {
     const audio = audioRef.current;
-    audio.volume = volume;
+    audio.volume = 0.5;
 
     audio.play().then(() => {
       setIsPlaying(true);
@@ -36,6 +36,10 @@ const Music = () => {
       audio.removeEventListener("ended", onEnded);
     };
   }, []);
+
+  useEffect(() => {
+    audioRef.current.volume = volume;
+  }, [volume]);
 
   const togglePlay = () => {
     const audio = audioRef.current;
